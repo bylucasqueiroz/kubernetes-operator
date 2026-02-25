@@ -1,0 +1,21 @@
+replicaCount: 1
+
+image:
+  repository: k8s-operator
+  tag: local
+  pullPolicy: Never
+
+serviceAccount:
+  name: k8s-operator
+  namespace: default
+
+rbac:
+  roleBindingName: k8s-operator-binding
+  roleNamespace: argocd
+
+service:
+  name: k8s-operator
+  type: NodePort
+  port: 80
+  targetPort: 8080
+  nodePort: 30007

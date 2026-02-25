@@ -7,16 +7,23 @@ spec:
   generators:
     - list:
         elements:
-          - replica: 1
+          - version: "v1"
+            service_name: "k8s-operator"
+          - version: "v2"
+            service_name: "k8s-operator"
   template:
     metadata:
-      name: 'k8s-operator-{{replica}}'
+      name: '{{ service_name }}-{{ version }}'
     spec:
       project: default
       source:
         repoURL: https://github.com/bylucasqueiroz/kubernetes-operator
         targetRevision: main
-        path: k8s
+        path: helm/k8s-operator
+        helm:
+          parameters:
+            - name: rbac.roleBindingName
+              value: '{{ service_name }}-{{ version }}-binding'
       destination:
         server: https://kubernetes.default.svc
         namespace: default

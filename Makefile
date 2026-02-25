@@ -25,12 +25,10 @@ build:
 	docker build -t $(IMAGE) .
 
 deploy:
-	kubectl apply -f manifests/
-	kubectl apply -f appset/
+	helm install k8s-operator ./helm/k8s-operator
 
 delete:
-	kubectl delete -f manifests/
-	kubectl delete -f appset/
+	helm uninstall k8s-operator
 
 restart:
 	kubectl rollout restart deployment $(APP_NAME) -n $(NAMESPACE)

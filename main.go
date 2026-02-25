@@ -15,7 +15,6 @@ import (
 )
 
 func main() {
-	// In-cluster config
 	config, err := rest.InClusterConfig()
 	if err != nil {
 		log.Fatal(err)

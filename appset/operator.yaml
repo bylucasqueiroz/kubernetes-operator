@@ -9,8 +9,10 @@ spec:
         elements:
           - version: "v1"
             service_name: "k8s-operator"
+            namespace: "operator-v1"
           - version: "v2"
             service_name: "k8s-operator"
+            namespace: "operator-v2"
   template:
     metadata:
       name: '{{ service_name }}-{{ version }}'
@@ -22,11 +24,17 @@ spec:
         path: helm/k8s-operator
         helm:
           parameters:
+            - name: namespace
+              value: '{{ namespace }}'
+            - name: serviceAccount.namespace
+              value: '{{ namespace }}'
+            - name: rbac.roleNamespace
+              value: '{{ namespace }}'
             - name: rbac.roleBindingName
               value: '{{ service_name }}-{{ version }}-binding'
       destination:
         server: https://kubernetes.default.svc
-        namespace: default
+        namespace: '{{ namespace }}'
       syncPolicy:
         automated:
           prune: true

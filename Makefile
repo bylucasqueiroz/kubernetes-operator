@@ -25,11 +25,11 @@ build:
 	docker build -t $(IMAGE) .
 
 deploy:
-	kubectl apply -f k8s/
+	kubectl apply -f manifests/
 	kubectl apply -f appset/
 
 delete:
-	kubectl delete -f k8s/
+	kubectl delete -f manifests/
 	kubectl delete -f appset/
 
 restart:

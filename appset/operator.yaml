@@ -7,11 +7,10 @@ spec:
   generators:
     - list:
         elements:
-          - cluster: in-cluster
-            url: https://kubernetes.default.svc
+          - replica: 1
   template:
     metadata:
-      name: k8s-operator
+      name: 'k8s-operator-{{replica}}'
     spec:
       project: default
       source:

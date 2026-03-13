@@ -7,11 +7,9 @@ image:
 
 serviceAccount:
   name: k8s-operator
-  namespace: default
 
 rbac:
   roleBindingName: k8s-operator-binding
-  roleNamespace: argocd
 
 service:
   name: k8s-operator
@@ -19,6 +17,3 @@ service:
   port: 80
   targetPort: 8080
   nodePort: 30007
-  
-namespace: 
-  name: operator

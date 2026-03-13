@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ .Values.serviceAccount.name }}"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: "{{ .Values.serviceAccount.name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.serviceAccount.name }}"
+    spec:
+      serviceAccountName: "{{ .Values.serviceAccount.name }}"
+      containers:
+        - name: app
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}

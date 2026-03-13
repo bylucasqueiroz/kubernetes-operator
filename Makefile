@@ -25,7 +25,7 @@ build:
 	docker build -t $(IMAGE) .
 
 deploy:
-	helm install k8s-operator ./helm/k8s-operator
+	helm upgrade --install k8s-operator ./manifests/helm/k8s-operator
 
 delete:
 	helm uninstall k8s-operator

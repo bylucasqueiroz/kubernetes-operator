@@ -22,7 +22,7 @@ docker-env:
 # Build docker image inside minikube
 build:
 	eval $$(minikube docker-env) && \
-	docker build -t $(IMAGE) .
+	docker build -t $(IMAGE) ./app
 
 deploy:
 	helm upgrade --install k8s-operator ./manifests/helm/k8s-operator
